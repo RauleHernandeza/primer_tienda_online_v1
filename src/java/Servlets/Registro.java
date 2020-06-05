@@ -1,13 +1,19 @@
 package Servlets;
 
 import Helpers.conexiondb;
+import Helpers.hash;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 public class Registro extends HttpServlet {
@@ -28,19 +34,42 @@ public class Registro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+        String pass= request.getParameter("contrasx");
+        hash ha= new hash(pass);
+        conexiondb con = new conexiondb();
+        con.DBConnection();
+        con.verificacion(request.getParameter("emailx"), ha.getTEST());
+        con.respuesta();
+        PrintWriter l= response.getWriter();
+        l.println("sdsdfdfsdfsdfsdfsfd");
         processRequest(request, response);
+        request.getRequestDispatcher("exit2.html").forward(request, response);
+        con.cerrarconexion();
+        
+        
+      } catch (NoSuchAlgorithmException ex) {
+          Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+      }
+       
         
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+      try {
+        String pass= request.getParameter("contras");
+        hash ha= new hash(pass);
         conexiondb con = new conexiondb();
         con.DBConnection();
-        con.crear(request.getParameter("email"), request.getIntHeader("ci"),
-        request.getParameter("contras"),request.getParameter("nombre"),request.getParameter("apellido"));
+        con.crear(request.getParameter("email"),
+        ha.getTEST(),request.getParameter("nombre"),request.getParameter("apellido"));
         con.cerrarconexion();
-        
+          
+      } catch (NoSuchAlgorithmException ex) {
+          Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+      }   
         processRequest(request, response);
         request.getRequestDispatcher("exit.html").forward(request, response);
     }

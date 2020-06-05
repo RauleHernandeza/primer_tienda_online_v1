@@ -15,7 +15,7 @@ public class conexiondb {
     PreparedStatement st=null;
     ResultSet rs=null;
     String todo=null;
-
+    String ee=null;
  ////////////////////////////////////////////////////////////////////////////////////   
      public Connection DBConnection() {
 		 try {
@@ -44,15 +44,14 @@ public class conexiondb {
       }
 
     ////////////////////////////////////////////////////////////////////////////////////  
-      public void crear(String c, int a, String d, String e, String b){
+      public void crear(String c, String d, String e, String b){
           
         try {
-            st = conexion.prepareCall("INSERT INTO usuario VALUES(?, ?, ?, ?, ?)");
+            st = conexion.prepareCall("INSERT INTO usuario VALUES(?, ?, ?, ?)");
             st.setString(1, c);
-            st.setInt(2, a);
-            st.setString(3, d);
-            st.setString(4, e);
-            st.setString(5, b);
+            st.setString(2, d);
+            st.setString(3, e);
+            st.setString(4, b);
             rs = st.executeQuery();
             
         } catch (SQLException ex ) {
@@ -73,4 +72,44 @@ public class conexiondb {
             Logger.getLogger(conexiondb.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
+      ////////////////////////////////////////////////////////////////////////////////////////
+      
+      public void actualizar(String c, String d, String e, String b, String o, String p){
+      try {
+            st = conexion.prepareCall("UPDATE usuario SET email=?, contras=?, nombre=?, apellido=? WHERE contras=? AND email=?");
+            st.setString(1, c);
+            st.setString(2, d);
+            st.setString(3, e);
+            st.setString(4, b);
+            st.setString(5, o);
+            st.setString(6, p);
+            rs = st.executeQuery();
+            
+        } catch (SQLException ex ) {
+            Logger.getLogger(conexiondb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      }
+      
+      //////////////////////////////////////////////////////////////////////////////////////
+      public void verificacion(String c, String d){
+        try {
+            st = conexion.prepareCall("SELECT * FROM usuario WHERE email=? AND contras=?");
+            st.setString(1, c);
+            st.setString(2, d);
+            rs = st.executeQuery();
+            if(rs.next()==!false){
+            ee="Bienvenido";
+            }
+            else{
+            ee="correo o contraseña invalida vuelva a intentar";
+            }
+        } catch (SQLException ex ) {
+            Logger.getLogger(conexiondb.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+      }
+      //////////////////////////////////////////////////////////////////////////////////////
+      public String respuesta(){
+      return ee;
+      }
 }
+

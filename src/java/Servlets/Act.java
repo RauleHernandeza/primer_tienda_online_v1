@@ -2,6 +2,7 @@ package Servlets;
 
 import Helpers.conexiondb;
 import Helpers.hash;
+import Helpers.hash2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
@@ -12,13 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Mirar extends HttpServlet {
+public class Act extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
     }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,21 +30,28 @@ public class Mirar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-        String pass= request.getParameter("contras");
+              try {
+        String pass= request.getParameter("contrass");
+        String pas= request.getParameter("contras");
         hash ha= new hash(pass);
+        hash2 as= new hash2(pas);
         conexiondb con = new conexiondb();
         con.DBConnection();
-        con.borrar(request.getParameter("email"),
-        ha.getTEST());
+        con.actualizar(request.getParameter("email"),as.getTESTT(),
+        request.getParameter("nombre"), request.getParameter("apellido"),
+        request.getParameter("emaill"), ha.getTEST());
         con.cerrarconexion();
-          
+        request.getRequestDispatcher("PUT.html").forward(request, response);
       } catch (NoSuchAlgorithmException ex) {
-          Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
       }
+      
+
+        
         processRequest(request, response);
         request.getRequestDispatcher("exit.html").forward(request, response);
     }
+
 
     @Override
     public String getServletInfo() {

@@ -42,9 +42,9 @@ public class Registro extends HttpServlet {
         con.verificacion(request.getParameter("emailx"), ha.getTEST());
         con.respuesta();
         PrintWriter l= response.getWriter();
-        l.println("sdsdfdfsdfsdfsdfsfd");
+        l.println("<h3>sdsdfdfsdfsdfsdfsfd</h3>");
+        response.sendRedirect("exit2.html");
         processRequest(request, response);
-        request.getRequestDispatcher("exit2.html").forward(request, response);
         con.cerrarconexion();
         
         

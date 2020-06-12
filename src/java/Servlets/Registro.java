@@ -20,7 +20,7 @@ public class Registro extends HttpServlet {
   String todo;
   Statement st;
   ResultSet rs;
-  
+  boolean n;
   
  
   
@@ -40,11 +40,15 @@ public class Registro extends HttpServlet {
         conexiondb con = new conexiondb();
         con.DBConnection();
         con.verificacion(request.getParameter("emailx"), ha.getTEST());
-        con.respuesta();
-        PrintWriter l= response.getWriter();
-        l.println("<h3>sdsdfdfsdfsdfsdfsfd</h3>");
+        if(con.respuesta()){
         response.sendRedirect("exit2.html");
         processRequest(request, response);
+        }
+        else{
+        response.sendRedirect("error vuelva a intentar.html");
+        processRequest(request, response);
+        }
+
         con.cerrarconexion();
         
         

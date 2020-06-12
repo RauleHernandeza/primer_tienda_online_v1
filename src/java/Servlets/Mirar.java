@@ -23,7 +23,28 @@ public class Mirar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try {
+        String pass= request.getParameter("contrasx");
+        hash ha= new hash(pass);
+        conexiondb con = new conexiondb();
+        con.DBConnection();
+        con.verificacion2(request.getParameter("emailx"), ha.getTEST());
+        if(con.respuesta()){
+        response.sendRedirect("ingres.html");
         processRequest(request, response);
+        }
+        else{
+        response.sendRedirect("error vuelva a intentar.html");
+        processRequest(request, response);
+        }
+
+        con.cerrarconexion();
+        
+        
+      } catch (NoSuchAlgorithmException ex) {
+          Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
 
     @Override

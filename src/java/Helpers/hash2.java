@@ -8,18 +8,20 @@ public class hash2 {
 	
 	public String TEST;
 	
-	public hash2(String pass) throws NoSuchAlgorithmException {	
+        
+	public hash2(String TEST) throws NoSuchAlgorithmException {	
 		MessageDigest digest = MessageDigest.getInstance("SHA-256");
-		byte[] encodedhash = digest.digest(pass.getBytes(StandardCharsets.UTF_8));
-		setTESTT(bytesToHex(encodedhash));
+		byte[] encodedhash = digest.digest(TEST.getBytes(StandardCharsets.UTF_8));
+		setTEST(bytesToHex(encodedhash));
 	}
 	
-	public String getTESTT() {
+	public String getTEST() {
 		return TEST;
 	}
 
-	public void setTESTT(String TEST) {
+	public void setTEST(String TEST) {
 		this.TEST = TEST;
+                System.out.println(TEST);
 	}
 
 	private static String bytesToHex(byte[] hash) {
@@ -31,4 +33,6 @@ public class hash2 {
 	    }
 	    return hexString.toString();
 	}
+        
+        
 }

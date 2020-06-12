@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Act extends HttpServlet {
-
+    
+    String dd;
+    String ddd;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -23,7 +25,18 @@ public class Act extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+       throws ServletException, IOException {
+       String b=request.getParameter("contras");
+       ddd=request.getParameter("email");
+        try {
+            hash a= new hash(b);
+            dd=a.getTEST();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Act.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(dd);
+        System.out.println(ddd);
+        request.getRequestDispatcher("PUT.html").forward(request, response);
         processRequest(request, response);
     }
 
@@ -31,17 +44,13 @@ public class Act extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
               try {
-        String pass= request.getParameter("contrass");
         String pas= request.getParameter("contras");
-        hash ha= new hash(pass);
-        hash2 as= new hash2(pas);
+        hash as= new hash(pas);
         conexiondb con = new conexiondb();
         con.DBConnection();
-        con.actualizar(request.getParameter("email"),as.getTESTT(),
-        request.getParameter("nombre"), request.getParameter("apellido"),
-        request.getParameter("emaill"), ha.getTEST());
+        con.actualizar(request.getParameter("email"),as.getTEST(),
+        request.getParameter("nombre"), request.getParameter("apellido"), dd, ddd);
         con.cerrarconexion();
-        request.getRequestDispatcher("PUT.html").forward(request, response);
       } catch (NoSuchAlgorithmException ex) {
         Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
       }

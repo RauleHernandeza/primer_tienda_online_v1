@@ -15,7 +15,10 @@ public class conexiondb {
     PreparedStatement st=null;
     ResultSet rs=null;
     String todo=null;
-    String ee=null;
+    boolean ee=false;
+    String dd=null;
+    String ddd= null;
+    String w=null;
  ////////////////////////////////////////////////////////////////////////////////////   
      public Connection DBConnection() {
 		 try {
@@ -33,7 +36,8 @@ public class conexiondb {
             }
 	 return conexion;
    	 }   
-////////////////////////////////////////////////////////////////////////////////////
+         
+//////////////////////////////////////////////////////////////////////////////////////
       public Connection cerrarconexion() { 
         try {
             conexion.close();
@@ -47,7 +51,7 @@ public class conexiondb {
       public void crear(String c, String d, String e, String b){
           
         try {
-            st = conexion.prepareCall("INSERT INTO usuario VALUES(?, ?, ?, ?)");
+            st = conexion.prepareCall("INSERT INTO usuario VALUES(?, ?, ?, ?, false)");
             st.setString(1, c);
             st.setString(2, d);
             st.setString(3, e);
@@ -74,17 +78,22 @@ public class conexiondb {
       }
       ////////////////////////////////////////////////////////////////////////////////////////
       
-      public void actualizar(String c, String d, String e, String b, String o, String p){
+      public void actualizar(String c, String d, String e, String b, String a, String f){
       try {
-            st = conexion.prepareCall("UPDATE usuario SET email=?, contras=?, nombre=?, apellido=? WHERE contras=? AND email=?");
+            st = conexion.prepareCall("UPDATE usuario SET email= ?, contras= ?, nombre= ?, apellido= ? WHERE contras= ? AND email= ?");
             st.setString(1, c);
             st.setString(2, d);
             st.setString(3, e);
             st.setString(4, b);
-            st.setString(5, o);
-            st.setString(6, p);
+            st.setString(5, a);
+            st.setString(6, f);
+            System.out.println(c);
+            System.out.println(d);
+            System.out.println(e);
+            System.out.println(b);
+            System.out.println(a);
+            System.out.println(f);
             rs = st.executeQuery();
-            
         } catch (SQLException ex ) {
             Logger.getLogger(conexiondb.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -98,18 +107,61 @@ public class conexiondb {
             st.setString(2, d);
             rs = st.executeQuery();
             if(rs.next()==!false){
-            ee="Bienvenido";
+            ee=true;
             }
             else{
-            ee="correo o contraseña invalida vuelva a intentar";
+            ee=false;
             }
         } catch (SQLException ex ) {
             Logger.getLogger(conexiondb.class.getName()).log(Level.SEVERE, null, ex);
         }  
       }
+  //////////////////////////////////////////////////////////////////////////////////////
+      public void verificacion2(String c, String d){
+        try {
+            String ra="raguna@gmail.com";
+            String ra2="14f0dc12357f28dc45721bf65e408e9e5c7258683ec2eb37ecfb3534bd5733";
+            System.out.println(c);
+            System.out.println(d);
+            if(ra.equals(c) && ra2.equals(d)){
+            st = conexion.prepareCall("SELECT * FROM usuario WHERE email=? AND contras=?");
+            st.setString(1, c);
+            st.setString(2, d);
+            rs = st.executeQuery();
+            if(rs.next()==!false){
+            ee=true;
+            }
+            else{
+            ee=false;
+                 }
+            }
+            else{
+            System.out.println("error en el ingreso de usuario");
+            ee=false;
+            }
+        } catch (SQLException ex ) {
+            Logger.getLogger(conexiondb.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+      }
+      
       //////////////////////////////////////////////////////////////////////////////////////
-      public String respuesta(){
+      public boolean respuesta(){
       return ee;
+      }
+     ////////////////////////////////////////////////////////////////////////////////////  
+      public void crearp(String c, String d, String e){
+          
+        try {
+            st = conexion.prepareCall("INSERT INTO productos VALUES(?, 'raguna@gmail.com', 'motoo', ?, ?)");
+            st.setString(1, c);
+            st.setString(2, d);
+            st.setString(3, e);
+            rs = st.executeQuery();
+            
+        } catch (SQLException ex ) {
+            Logger.getLogger(conexiondb.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+         
       }
 }
 

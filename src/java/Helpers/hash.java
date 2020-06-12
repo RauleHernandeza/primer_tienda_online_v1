@@ -9,9 +9,15 @@ public class hash {
 	public String TEST;
 	
 	public hash(String pass) throws NoSuchAlgorithmException {	
-		MessageDigest digest = MessageDigest.getInstance("SHA-256");
-		byte[] encodedhash = digest.digest(pass.getBytes(StandardCharsets.UTF_8));
-		setTEST(bytesToHex(encodedhash));
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(pass.getBytes());
+        byte[] digest = md.digest();
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0;i<digest.length;i++) {
+        hexString.append(Integer.toHexString(0xFF & digest[i]));
+      }
+        TEST=hexString.toString();
+        System.out.println(TEST);
 	}
 	
 	public String getTEST() {
@@ -22,14 +28,5 @@ public class hash {
 		this.TEST = TEST;
 	}
 
-	private static String bytesToHex(byte[] hash) {
-	    StringBuffer hexString = new StringBuffer();
-	    for (int i = 0; i < hash.length; i++) {
-	    String hex = Integer.toHexString(0xff & hash[i]);
-	    if(hex.length() == 1) hexString.append('0');
-	        hexString.append(hex);
-	    }
-	    return hexString.toString();
-	}
 }
 

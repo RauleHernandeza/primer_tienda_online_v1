@@ -28,6 +28,10 @@
         <servlet-name>Actt</servlet-name>
         <servlet-class>Servlets.Actt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cuentas</servlet-name>
+        <servlet-class>Servlets.cuentas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>Actt</servlet-name>
         <url-pattern>/Actt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cuentas</servlet-name>
+        <url-pattern>/cuentas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

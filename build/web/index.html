@@ -1,25 +1,81 @@
-
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>ojala funcione a la primerass</title>
-        <link rel="stylesheet" href="css1.css">
-    </head>
-    <body>
-        <h1>Bienvenidos a nuestra tienda!</h1>
-        <h2>disfrute su visita</h2>
-        <div>
-            <a href="./principal.html">click aqui si desea crear un usuario</a> 
-            <br/>
-            <a href="./delete.html">click aqui si desea borrar su cuenta</a> 
-            <br/>
-            <a href="./PUT2.html">click aqui si desea actualizar su cuenta</a> 
-            <br/>
-            <a href="./verificacion.html">click aqui para ingresar</a> 
-            <br/>
-            <a href="./inicio.html">click aqui para ingresar a la pagina principals</a>
-            <br/>
-            <a href="./verificacion2.html">click aqui para ingresar un producto</a>
-        </div>        
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet"> 
+	<link rel="stylesheet" href="newcss.css">
+	<title>tiendita</title>
+</head>
+<body>
+    
+    
+	<div class="contenedor">
+		<header>
+                        <a href="./verificacion.html">Iniciar</a>
+                        <a href="./principal.html">crear</a>
+                        <a href="./delete.html">eliminar</a>
+                        <a href="./PUT2.html">Actualizar</a>
+                        <a href="./verificacion2.html">crear producto</a>
+			<h1>FalconMasters</h1>
+			<h2>Lorem Ipsum Premium Store</h2>
+		</header>
+		<main>
+			<section class="productos">
+				<figure>
+					<img src="img/img1.jpg" alt="">
+					<figcaption>
+						<a href="#">
+							<span>$1300</span>
+							<span>Comprar</span>
+						</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<img src="img/img2.jpg" alt="">
+					<figcaption>
+						<a href="#">
+							<span>$1200</span>
+							<span>Comprar</span>
+						</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<img src="img/img3.jpg" alt="">
+					<figcaption>
+						<a href="#">
+							<span>$1000</span>
+							<span>Comprar</span>
+						</a>
+					</figcaption>
+				</figure>
+                            
+			</section>
+		</main>
+	</div>
+                    
+                    <button id="boton">añadir a carrito</button>
+                    <button id="boton2">añadir a carrito</button>
+                    <button id="boton3">añadir a carrito</button>
+                    <button id="boton4">carrito</button>
+                  
+ 
+                    
+                    <div id="sidebar">
+                        <div class="toggle-btn">
+                            <span>&#9776</span>
+                        </div>
+                        <ul>
+                            <li><p>añadido al Carrito</p></li>
+                            <li><div class="item1"><img src="img/img1.jpg" alt="" id="ds"><p id="dss">$1300</p></div></li>
+                            <li><div class="item2"><img src="img/img2.jpg" alt="" id="ps"><p id="pss">$1200</p></div></li>
+                            <li><div class="item4"><img src="img/img3.jpg" alt="" id="as"><p id="ass">$1000</p></div></li>
+                            <li><button id="boton5">comprar</button></li>
+                        </ul>
+                    </div>
+<script defer src="mm.js"></script>
+                   <form action="Registro" method="POST">
+                    <input type="submit" value="aceptar"/>
+                    </form>
+</body>
 </html>
